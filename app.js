@@ -1,5 +1,6 @@
 import express from 'express';
 import { postgraphile } from 'postgraphile';
+import { PgSimplifyInflectorPlugin } from '@graphile-contrib/pg-simplify-inflector';
 import { router } from './routes/routes.js'
 import { errorHandlerMiddleware } from './middleware/errorHandler.js'
 import { notFound } from './middleware/notFoundHandler.js'
@@ -19,6 +20,7 @@ app.use(
       process.env.DATABASE_URL || "postgres://postgres:postgres@127.0.0.1:5432/dvdrental",
       "public",
       {
+        appendPlugins: [PgSimplifyInflectorPlugin],
         watchPg: true,
         graphiql: true,
         enhanceGraphiql: true,
